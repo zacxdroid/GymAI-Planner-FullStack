@@ -5,7 +5,8 @@ import { Select } from "../components/ui/Select";
 import { useState } from "react";
 import { Textarea } from "../components/ui/Textarea";
 import { Button } from "../components/ui/Button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Loader2 } from "lucide-react";
+import type { UserProfile } from "../types";
 
 const goalOptions = [
   { value: "bulk", label: "Build Muscle (Bulk)" },
@@ -51,8 +52,7 @@ const splitOptions = [
 ];
 
 export default function Onboarding() {
-    const { user } = useAuth()
-
+    const { user, storeProfile } = useAuth()
     const [formData, setFormData] = useState({
         goal: "bulk",
         experience: "intermediate",
@@ -62,6 +62,8 @@ export default function Onboarding() {
         injuries: "",
         preferredSplit: "upper_lower",
     });
+    const [isGenerating, setIsGenerating] = useState(false)
+    const [ error, setError ] = useState("")
 
     function updateForm(field: string, value: string) {
         setFormData((prev) => ({ ...prev, [field]: value }));
@@ -69,6 +71,24 @@ export default function Onboarding() {
 
     async function handleQuestionnaire (e: React.SubmitEvent) {
         e.preventDefault()
+        //Store the Profile Data
+        const profileData: Omit<UserProfile, 'userId' | 'updatedAt'> = {
+            goal: formData.goal as UserProfile["goal"],
+            experience: formData.experience as UserProfile["experience"],
+            daysPerWeek: parseInt(formData.daysPerWeek),
+            sessionLength: parseInt(formData.sessionLength),
+            equipment: formData.equipment as UserProfile["equipment"],
+            injuries: formData.injuries || undefined,
+            preferredSplit: formData.preferredSplit as UserProfile["preferredSplit"],
+        }
+        try {
+            await storeProfile(profileData)
+            setIsGenerating(true)
+        } catch (err) {
+            setError(err instanceof Error ? err.message: "Failed to save profile")
+        } finally {
+            setIsGenerating(false)
+        }
     }
 
     if (!user) {
@@ -81,6 +101,7 @@ export default function Onboarding() {
                     {/* Progress Indicator */}
 
                     {/* Step 1: Questionnaire */}
+                    { !isGenerating ? (
                     <Card variant="bordered">
                         <h1 className="text-2xl font-bold mb-2">Tell Us About Yourself!</h1>
                         <p className="text-muted mb-6">Help us to create the perfect plan for you.</p>
@@ -148,8 +169,16 @@ export default function Onboarding() {
                             </div>
                         </form>
                     </Card>
-
-                    {/* Step 1: Generating plan */}
+                    ): (
+                    <Card variant="bordered" className="text-center py-16">
+                        <Loader2 className="w-12 h-12 text-accent mx-auto mb-6 animate-spin"/>
+                        <h1 className="text-2xl font-bold mb-2">Creating your Plan</h1>
+                        <p className="text-muted">
+                            {" "}
+                            Our AI is building your personalized training program...
+                        </p>
+                    </Card>
+                    )}
                 </div>
             </div>
         </SignedIn>
