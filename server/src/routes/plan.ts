@@ -1,6 +1,7 @@
 import { Router } from 'express'
-import { generatePlan } from '../../controllers/planController'
+import { generatePlan, getCurrentPlan } from '../../controllers/planController'
 
 export const planRouter =  Router()
 
 planRouter.post("/generate", generatePlan)
+planRouter.get("/current", getCurrentPlan)
