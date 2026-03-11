@@ -27,7 +27,8 @@ const generatePlan = async (req: Request, res: Response) => {
 
         const nextVersion = latestPlan ? latestPlan.version + 1 : 1;
         let planJson;
-
+        
+        //Generate Training Plan
         try {
             planJson = await generateTrainingPlan(profile);
         } catch (error) {

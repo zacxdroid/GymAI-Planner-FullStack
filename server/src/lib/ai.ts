@@ -39,7 +39,7 @@ export async function generateTrainingPlan(profile: UserProfile | Record<string,
     //API call to OpenAI
     try {
         const completion = await openai.chat.completions.create({
-           model: "nvidia/llama-nemotron-embed-vl-1b-v2:free",
+           model: "arcee-ai/trinity-mini:free",
            messages: [
             {
                 role: "system",

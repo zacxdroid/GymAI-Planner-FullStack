@@ -31,5 +31,9 @@ async function get(path: string) {
 export const api = {
     storeProfile: ( userId: string, profileData: Omit<UserProfile, 'userId' | 'updatedAt'> ) => {
         return post("/profile", { userId, ...profileData });
+    },
+
+    generatePlan: (userId: string) => {
+      return post("/plan/generate", { userId })
     }
 }
