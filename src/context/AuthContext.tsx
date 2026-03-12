@@ -39,6 +39,18 @@ export default function AuthProvider( {children }: { children: ReactNode}) {
         loadUser()
     }, [])
 
+    useEffect(() => {
+        if (!isLoading) {
+        if (neonUser?.id) {
+            refreshData();
+        } else {
+            setPlan(null);
+        }
+        setIsLoading(false);
+        }
+    }, [neonUser?.id, isLoading]);
+
+
     // refreshData memoize
     const refreshData = useCallback(async () => {
         if (!neonUser || isRefreshingRef.current) return;
