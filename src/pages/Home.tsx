@@ -45,7 +45,7 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative pt-26 pb-20 px-6 overflow-hidden">
         {/* Background gradient */}
-        <div className="absolute inset-0 bg-linear-to-t from-accent/14 via-transparent to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-b from-accent/14 via-transparent to-transparent" />
         <div className="absolute left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-accent/18 rounded-full blur-3xl" />
 
         <div className="relative max-w-6xl mx-auto text-center">
@@ -116,6 +116,30 @@ export default function Home() {
                 </p>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="relative py-20 px-6">
+        <div className="absolute inset-0 bg-linear-to-t from-accent/14 via-transparent to-transparent" />
+        <div className="relative max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">What are you waiting for?</h2>
+            <p className="text-muted text-lg max-w-2xl mx-auto">
+              Get your personalized training program right now!
+            </p>
+
+            <div className="py-10">
+              <Link to="/onboarding">
+              <Button size="lg" className="gap-2">
+                Get Started Free
+                <ArrowRight className="w-5 h-5"/>
+              </Button>
+            </Link>
+            </div>
+
           </div>
         </div>
       </section>
