@@ -101,8 +101,10 @@ export default function Onboarding() {
     }
     return (
         <SignedIn>
-            <div className="min-h-screen pt-24 pb-12 px-6">
-                <div className="max-w-xl mx-auto">
+            <div className="relative min-h-screen pt-24 pb-12 px-6">
+                <div className="absolute inset-0 bg-linear-to-t from-accent/14 via-transparent to-transparent" />
+                <div className="absolute inset-0 bg-linear-to-b from-accent/14 via-transparent to-transparent" />
+                <div className="relative max-w-xl mx-auto">
                     {/* Progress Indicator */}
 
                     {/* Step 1: Questionnaire */}
@@ -175,14 +177,13 @@ export default function Onboarding() {
                         </form>
                     </Card>
                     ): (
-                    <Card variant="bordered" className="text-center py-16">
-                        <Loader2 className="w-12 h-12 text-accent mx-auto mb-6 animate-spin"/>
-                        <h1 className="text-2xl font-bold mb-2">Creating your Plan</h1>
-                        <p className="text-muted">
-                            {" "}
-                            Our AI is building your personalized training program...
-                        </p>
-                    </Card>
+                    <div className="my-50">
+                        <Card variant="bordered" className="text-center py-16">
+                            <Loader2 className="w-12 h-12 text-accent mx-auto mb-6 animate-spin"/>
+                            <h1 className="text-2xl font-bold mb-2">Creating your Plan</h1>
+                            <p className="text-muted"> Our AI is building your personalized training program... </p>
+                        </Card>
+                    </div>
                     )}
                 </div>
             </div>

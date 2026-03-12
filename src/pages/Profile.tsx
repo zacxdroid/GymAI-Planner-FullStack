@@ -26,8 +26,10 @@ export default function Profile() {
     }
 
     return (
-        <div className="min-h-screen pt-24 pb-12 px-6">
-            <div className="max-w-4xl mx-auto">
+        <div className="relative min-h-screen pt-24 pb-12 px-6">
+            <div className="absolute inset-0 bg-linear-to-t from-accent/14 via-transparent to-transparent" />
+            <div className="absolute inset-0 bg-linear-to-b from-accent/14 via-transparent to-transparent" />
+            <div className="relative max-w-4xl mx-auto">
                 <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
                     <div>
                         <h1 className="text-3xl font-bold mb-1">Your Training Plan</h1>

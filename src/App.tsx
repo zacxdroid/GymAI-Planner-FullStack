@@ -20,7 +20,7 @@ function App() {
             <Navbar/>
             <main className="flex-2">
             <Routes>
-              <Route index element={<Home/>}/>
+              <Route path="/" element={<Home/>}/>
               <Route path="/onboarding" element={<Onboarding/>}/>
               <Route path="/profile" element={<Profile/>}/>
               <Route path="/auth/:pathname" element={<Auth/>}/>
