@@ -99,13 +99,13 @@ export default function Onboarding() {
     if (!user) {
         return <RedirectToSignIn/>
     }
+    
     return (
         <SignedIn>
             <div className="relative min-h-screen pt-24 pb-12 px-6">
                 <div className="absolute inset-0 bg-linear-to-t from-accent/14 via-transparent to-transparent" />
                 <div className="absolute inset-0 bg-linear-to-b from-accent/14 via-transparent to-transparent" />
                 <div className="relative max-w-xl mx-auto">
-                    {/* Progress Indicator */}
 
                     {/* Step 1: Questionnaire */}
                     { !isGenerating ? (

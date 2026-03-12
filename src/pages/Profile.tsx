@@ -1,12 +1,16 @@
-import { Navigate } from "react-router-dom"
+import { Navigate, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 import { Button } from "../components/ui/Button"
 import { Calendar, Dumbbell, RefreshCcw, Target, TrendingUp } from "lucide-react"
 import { Card } from "../components/ui/Card"
 import { PlanDisplay } from "../components/plan/PlanDisplay"
+import { useState } from "react"
 
 export default function Profile() {
     const { user, isLoading, plan } = useAuth()
+    const [ error, setError ] = useState("")
+
+    const navigate = useNavigate()
 
     if (!user && !isLoading) {
         return <Navigate to="/auth/sign-in" replace />
@@ -25,6 +29,15 @@ export default function Profile() {
         });
     }
 
+    async function handleQuestionnaire (e: React.SubmitEvent) {
+        e.preventDefault()
+        try {
+            navigate("/onboarding")
+        } catch (err) {
+            setError(err instanceof Error ? err.message: "Failed to regenerate plan")
+        }
+    }
+
     return (
         <div className="relative min-h-screen pt-24 pb-12 px-6">
             <div className="absolute inset-0 bg-linear-to-t from-accent/14 via-transparent to-transparent" />
@@ -35,11 +48,12 @@ export default function Profile() {
                         <h1 className="text-3xl font-bold mb-1">Your Training Plan</h1>
                         <p className="text-muted">Version {plan.version} | Created {formatDate(plan.createdAt)}</p>
                     </div>
-
-                    <Button variant="secondary" className="gap-2">
-                        <RefreshCcw className="w-5 h-5"/>
-                        Regenerate Plan
-                    </Button>
+                    <form onSubmit={handleQuestionnaire}>
+                        <Button type="submit" variant="secondary" className="gap-2">
+                            <RefreshCcw className="w-5 h-5"/>
+                            Regenerate Plan
+                        </Button>
+                    </form>
                 </div>
 
                 {/* Overview Cards */}
