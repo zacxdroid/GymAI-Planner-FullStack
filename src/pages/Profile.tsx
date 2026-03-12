@@ -3,6 +3,7 @@ import { useAuth } from "../context/AuthContext"
 import { Button } from "../components/ui/Button"
 import { Calendar, Dumbbell, RefreshCcw, Target, TrendingUp } from "lucide-react"
 import { Card } from "../components/ui/Card"
+import { PlanDisplay } from "../components/plan/PlanDisplay"
 
 export default function Profile() {
     const { user, isLoading, plan } = useAuth()
@@ -91,7 +92,12 @@ export default function Profile() {
 
                 {/* Weekly Schedule */}
                 <h2 className="font-semibold text-xl mb-4">Weekly Schedule</h2>
+                <PlanDisplay weeklySchedule={plan.weeklySchedule}/>
                 
+                <Card variant="bordered" className="mb-8">
+                    <h2 className="font-semibold text-lg mb-2">Progression Strategy</h2>
+                    <p className="text-muted text-sm leading-relaxed">{plan.progression}</p>
+                </Card>
             </div>
         </div>
     )
