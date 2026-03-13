@@ -22,4 +22,4 @@
 - PostgreSQL (Neon serverless)
 
 ### Architecture
-The backend follows a **REST API architecture** with modular routes and service layers to handle business logic and database interaction.
+The backend follows a **REST API architecture** with modular routes.
